@@ -1,0 +1,17 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  min-height: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Tajawal', system-ui, sans-serif;
+  color: #5a3e3a;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(246, 210, 203, .55), transparent 40%),
+    radial-gradient(circle at 90% 30%, rgba(226, 201, 154, .35), transparent 40%),
+    radial-gradient(circle at 20% 90%, rgba(246, 210, 203, .5), transparent 45%),
+    #fdf8f3;
+  background-attachment: fixed;
+}

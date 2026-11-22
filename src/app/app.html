@@ -1,0 +1,167 @@
+<audio #audio [src]="w.song" loop preload="auto"></audio>
+
+<!-- ورد بيقع -->
+<div class="petals" aria-hidden="true">
+  @for (p of petals; track $index) {
+    <span class="petal" [class.heart]="p.kind === 'heart'"
+      [style.left.%]="p.left"
+      [style.width.px]="p.size" [style.height.px]="p.size"
+      [style.animation-delay.s]="p.delay"
+      [style.animation-duration.s]="p.duration"
+      [style.--drift]="p.drift + 'px'"></span>
+  }
+</div>
+
+<!-- ================= الظرف ================= -->
+@if (!opened()) {
+  <section class="cover" [class.opening]="opening()" (click)="openInvitation()">
+    <div class="cover-inner">
+      <p class="cover-top">You're invited</p>
+
+      <div class="envelope">
+        <div class="env-back"></div>
+        <div class="letter">
+          <span class="letter-names">{{ w.groom.en }} <i>&amp;</i> {{ w.bride.en }}</span>
+          <span class="letter-date">{{ dateEn }}</span>
+        </div>
+        <div class="env-front"></div>
+        <div class="env-flap"></div>
+        <button class="seal" type="button" aria-label="افتح الدعوة">
+          <span>{{ w.groom.en[0] }}<small>&amp;</small>{{ w.bride.en[0] }}</span>
+        </button>
+      </div>
+
+      <h1 class="cover-names">{{ w.groom.ar }} <span>&</span> {{ w.bride.ar }}</h1>
+      <p class="tap">اضغط لفتح الدعوة <span class="tap-hand">👆</span></p>
+    </div>
+  </section>
+}
+
+<!-- ================= زرار المزيكا ================= -->
+@if (opened()) {
+  <button class="music-btn" [class.spin]="playing()" (click)="toggleMusic()"
+    [attr.aria-label]="playing() ? 'إيقاف المزيكا' : 'تشغيل المزيكا'">
+    @if (playing()) {
+      <svg viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+    } @else {
+      <svg viewBox="0 0 24 24"><path d="M4.27 3 3 4.27l9 9v.28A4 4 0 1 0 14 17v-1.73L19.73 21 21 19.73 4.27 3zM14 7h4V3h-6v5.18l2 2z"/></svg>
+    }
+  </button>
+}
+
+<!-- ================= الدعوة ================= -->
+@if (opened()) {
+  <main class="page">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="frame">
+        <p class="bismillah reveal">بسم الله الرحمن الرحيم</p>
+        <p class="ayah reveal">
+          ﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا
+          وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾
+        </p>
+
+        <div class="ornament reveal">❦</div>
+
+        <p class="pre reveal">بكل الحب والفرح ندعوكم لمشاركتنا فرحتنا</p>
+
+        <div class="names reveal">
+          <h2 class="name">{{ w.groom.ar }}</h2>
+          <div class="amp">
+            <span class="line"></span>
+            <svg viewBox="0 0 32 29" class="mini-heart"><path d="M23.6 0c-3.4 0-6.3 2.7-7.6 5.6C14.7 2.7 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4c0 9.4 9.5 11.9 16 21.2 6.1-9.3 16-12.1 16-21.2C32 3.8 28.2 0 23.6 0z"/></svg>
+            <span class="line"></span>
+          </div>
+          <h2 class="name">{{ w.bride.ar }}</h2>
+        </div>
+
+        <p class="names-en reveal">{{ w.groom.en }} &amp; {{ w.bride.en }}</p>
+        <p class="save reveal">Save the Date</p>
+      </div>
+    </section>
+
+    <!-- التاريخ -->
+    <section class="card reveal">
+      <h3 class="section-title">موعد الفرح</h3>
+
+      <div class="date-row">
+        <div class="date-side">{{ dayName }}</div>
+        <div class="date-main">
+          <span class="d">{{ dayNum }}</span>
+          <span class="m">{{ monthName }}</span>
+          <span class="y">{{ year }}</span>
+        </div>
+        <div class="date-side">الساعة {{ time }}</div>
+      </div>
+
+      <div class="calendar">
+        <div class="cal-head">{{ monthName }} {{ year }}</div>
+        <div class="cal-grid">
+          @for (d of weekDays; track d) { <span class="wd">{{ d }}</span> }
+          @for (c of calendar; track $index) {
+            <span class="cd" [class.wed]="c.isWedding">
+              @if (c.isWedding) {
+                <svg viewBox="0 0 32 29"><path d="M23.6 0c-3.4 0-6.3 2.7-7.6 5.6C14.7 2.7 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4c0 9.4 9.5 11.9 16 21.2 6.1-9.3 16-12.1 16-21.2C32 3.8 28.2 0 23.6 0z"/></svg>
+              }
+              <b>{{ toAr(c.day) }}</b>
+            </span>
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- العد التنازلي -->
+    <section class="card reveal">
+      <h3 class="section-title">باقي على الفرح</h3>
+      @if (!countdown().done) {
+        <div class="countdown">
+          <div class="cbox"><span>{{ pad(countdown().days) }}</span><small>يوم</small></div>
+          <div class="cbox"><span>{{ pad(countdown().hours) }}</span><small>ساعة</small></div>
+          <div class="cbox"><span>{{ pad(countdown().minutes) }}</span><small>دقيقة</small></div>
+          <div class="cbox"><span>{{ pad(countdown().seconds) }}</span><small>ثانية</small></div>
+        </div>
+      } @else {
+        <p class="done-msg">النهارده الفرح 🎉 مستنيينكم!</p>
+      }
+      <a class="btn ghost" [href]="calendarLink" target="_blank" rel="noopener">
+        📅 ضيف الميعاد لتقويمك
+      </a>
+    </section>
+
+    <!-- المكان -->
+    <section class="card reveal">
+      <h3 class="section-title">مكان الفرح</h3>
+      <div class="venue-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+      </div>
+      <p class="venue-name">{{ w.venue.name }}</p>
+      <p class="venue-en">{{ w.venue.nameEn }}</p>
+      <p class="venue-addr">{{ w.venue.address }}</p>
+
+      <div class="map">
+        <iframe [src]="mapUrl" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="خريطة القاعة" allowfullscreen></iframe>
+      </div>
+
+      <a class="btn" [href]="w.venue.mapsLink" target="_blank" rel="noopener">
+        🧭 افتح اللوكيشن على الخريطة
+      </a>
+    </section>
+
+    <!-- الختام -->
+    <section class="closing reveal">
+      <div class="ornament">❦</div>
+      <p class="closing-text">بحضوركم تكتمل فرحتنا</p>
+      <p class="closing-sub">ويسعدنا تشريفكم ومشاركتكم أجمل أيام عمرنا</p>
+      <p class="sign">{{ w.groom.ar }} &amp; {{ w.bride.ar }}</p>
+      <p class="hashtag">{{ w.hashtag }}</p>
+
+      <button class="btn ghost" type="button" (click)="share()">
+        {{ copied() ? '✔ اتنسخ اللينك' : '🔗 شارك الدعوة' }}
+      </button>
+    </section>
+
+    <footer class="footer">Made with 🤍 for {{ w.groom.en }} &amp; {{ w.bride.en }}</footer>
+  </main>
+}
