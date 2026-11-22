@@ -11,13 +11,13 @@ export const WEDDING = {
   durationHours: 5,
 
   venue: {
-    name: 'قاعة لوسيال',
-    nameEn: 'Leciel Wedding Hall',
-    address: 'جزيرة المعادي - كورنيش المعادي - القاهرة',
+    name: 'Leciel Wedding Hall',
+    address: 'Maadi Island, Corniche El Maadi, Cairo',
     mapsLink: 'https://maps.app.goo.gl/h5BTn1dhSdfH7hhQ9',
     embedQuery: 'قاعه لوسيال جزيره المعادي',
   },
 
   song: 'song.mp3',
-  hashtag: '#عبدالرحمن_ومنة',
+  photo: 'couple.jpg',
+  hashtag: '#AbdelrahmanAndMenna',
 };

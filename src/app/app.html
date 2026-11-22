@@ -1,5 +1,123 @@
 <audio #audio [src]="w.song" loop preload="auto"></audio>
 
+<!-- ================= الورد (SVG symbols) ================= -->
+<svg class="defs" aria-hidden="true" width="0" height="0">
+  <defs>
+    <radialGradient id="g-navy" cx="50%" cy="50%" r="60%">
+      <stop offset="0" stop-color="#16316b"/>
+      <stop offset=".45" stop-color="#2b4f97"/>
+      <stop offset="1" stop-color="#7f9fd6"/>
+    </radialGradient>
+    <radialGradient id="g-light" cx="50%" cy="50%" r="60%">
+      <stop offset="0" stop-color="#5e82c2"/>
+      <stop offset=".5" stop-color="#9db8e3"/>
+      <stop offset="1" stop-color="#dbe6f7"/>
+    </radialGradient>
+    <radialGradient id="g-white" cx="50%" cy="50%" r="60%">
+      <stop offset="0" stop-color="#e9e1cf"/>
+      <stop offset=".55" stop-color="#fbf8f1"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </radialGradient>
+    <radialGradient id="g-center" cx="40%" cy="35%" r="65%">
+      <stop offset="0" stop-color="#3b5aa0"/>
+      <stop offset="1" stop-color="#0e1f47"/>
+    </radialGradient>
+    <linearGradient id="g-leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a9b8ad"/>
+      <stop offset="1" stop-color="#6d8577"/>
+    </linearGradient>
+    <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8d3a2"/>
+      <stop offset=".5" stop-color="#c3a46b"/>
+      <stop offset="1" stop-color="#9c7c45"/>
+    </linearGradient>
+
+    <!-- بتلة -->
+    <path id="petal" d="M0 -4 C -17 -12 -21 -36 -8 -45 C -3 -48 3 -48 8 -45 C 21 -36 17 -12 0 -4 Z"/>
+    <path id="petal-s" d="M0 -4 C -12 -10 -15 -27 -6 -33 C -2 -35 2 -35 6 -33 C 15 -27 12 -10 0 -4 Z"/>
+
+    <!-- مركز الوردة -->
+    <g id="center">
+      <circle r="9" fill="url(#g-center)"/>
+      <g fill="#d9bb7a">
+        <circle cx="0" cy="-13" r="1.6"/><circle cx="9" cy="-9" r="1.6"/><circle cx="13" cy="0" r="1.6"/>
+        <circle cx="9" cy="9" r="1.6"/><circle cx="0" cy="13" r="1.6"/><circle cx="-9" cy="9" r="1.6"/>
+        <circle cx="-13" cy="0" r="1.6"/><circle cx="-9" cy="-9" r="1.6"/>
+        <circle cx="5" cy="-11" r="1.1"/><circle cx="11" cy="-5" r="1.1"/><circle cx="11" cy="5" r="1.1"/>
+        <circle cx="5" cy="11" r="1.1"/><circle cx="-5" cy="11" r="1.1"/><circle cx="-11" cy="5" r="1.1"/>
+        <circle cx="-11" cy="-5" r="1.1"/><circle cx="-5" cy="-11" r="1.1"/>
+      </g>
+      <circle r="3" fill="#e8d3a2" opacity=".85"/>
+    </g>
+
+    <symbol id="fl-navy" viewBox="-50 -50 100 100">
+      <g fill="url(#g-navy)" stroke="#1b336b" stroke-width=".6" stroke-opacity=".5">
+        @for (r of rot6; track r) { <use href="#petal" [attr.transform]="'rotate(' + r + ')'"/> }
+      </g>
+      <g fill="url(#g-light)" opacity=".55">
+        @for (r of rot6; track r) { <use href="#petal-s" [attr.transform]="'rotate(' + (r + 30) + ')'"/> }
+      </g>
+      <use href="#center"/>
+    </symbol>
+
+    <symbol id="fl-light" viewBox="-50 -50 100 100">
+      <g fill="url(#g-light)" stroke="#5a7cb8" stroke-width=".6" stroke-opacity=".5">
+        @for (r of rot6; track r) { <use href="#petal" [attr.transform]="'rotate(' + r + ')'"/> }
+      </g>
+      <g fill="#ffffff" opacity=".35">
+        @for (r of rot6; track r) { <use href="#petal-s" [attr.transform]="'rotate(' + (r + 30) + ')'"/> }
+      </g>
+      <use href="#center"/>
+    </symbol>
+
+    <symbol id="fl-white" viewBox="-50 -50 100 100">
+      <g fill="url(#g-white)" stroke="#c9bd9f" stroke-width=".7" stroke-opacity=".7">
+        @for (r of rot6; track r) { <use href="#petal" [attr.transform]="'rotate(' + r + ')'"/> }
+      </g>
+      <g fill="#efe7d6" opacity=".6">
+        @for (r of rot6; track r) { <use href="#petal-s" [attr.transform]="'rotate(' + (r + 30) + ')'"/> }
+      </g>
+      <use href="#center"/>
+    </symbol>
+
+    <symbol id="leaf" viewBox="-12 -40 24 42">
+      <path d="M0 0 C -11 -10 -10 -30 0 -38 C 10 -30 11 -10 0 0 Z" fill="url(#g-leaf)"/>
+      <path d="M0 -2 L0 -34" stroke="#56705f" stroke-width=".8" fill="none" opacity=".6"/>
+    </symbol>
+
+    <symbol id="bud" viewBox="-12 -30 24 34">
+      <path d="M0 -26 C -9 -22 -10 -8 0 0 C 10 -8 9 -22 0 -26 Z" fill="url(#g-navy)"/>
+      <path d="M-6 -4 C -5 -10 -2 -12 0 -6 C 2 -12 5 -10 6 -4 C 3 2 -3 2 -6 -4 Z" fill="url(#g-leaf)"/>
+    </symbol>
+
+    <!-- باقة للأركان -->
+    <symbol id="spray" viewBox="0 0 200 200">
+      <path d="M10 190 C 50 150 80 120 120 70 M60 140 C 90 135 120 140 150 150 M90 105 C 80 75 85 45 95 20"
+        stroke="#7d9283" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <use href="#leaf" x="30" y="125" width="26" height="44" transform="rotate(-50 43 147)"/>
+      <use href="#leaf" x="118" y="118" width="24" height="40" transform="rotate(70 130 138)"/>
+      <use href="#leaf" x="68" y="62" width="22" height="38" transform="rotate(-25 79 81)"/>
+      <use href="#bud" x="84" y="2" width="24" height="34"/>
+      <use href="#bud" x="140" y="132" width="20" height="28" transform="rotate(80 150 146)"/>
+      <use href="#fl-light" x="40" y="70" width="80" height="80"/>
+      <use href="#fl-navy" x="95" y="40" width="90" height="90"/>
+      <use href="#fl-white" x="15" y="135" width="56" height="56"/>
+    </symbol>
+
+    <!-- فاصل -->
+    <symbol id="divider" viewBox="0 0 300 40">
+      <path d="M10 20 C 50 20 70 12 110 20 M290 20 C 250 20 230 12 190 20" stroke="url(#g-gold)" stroke-width="1.5" fill="none"/>
+      <path d="M70 20 c 6 -8 14 -8 16 0 M230 20 c -6 -8 -14 -8 -16 0" stroke="url(#g-gold)" stroke-width="1.2" fill="none"/>
+      <use href="#leaf" x="113" y="8" width="14" height="24" transform="rotate(-70 120 20)"/>
+      <use href="#leaf" x="173" y="8" width="14" height="24" transform="rotate(70 180 20)"/>
+      <use href="#fl-light" x="118" y="8" width="24" height="24"/>
+      <use href="#fl-navy" x="158" y="8" width="24" height="24"/>
+      <use href="#fl-white" x="132" y="2" width="36" height="36"/>
+      <circle cx="8" cy="20" r="2.5" fill="#2b4f97"/><circle cx="292" cy="20" r="2.5" fill="#2b4f97"/>
+    </symbol>
+  </defs>
+</svg>
+
 <!-- ورد بيقع -->
 <div class="petals" aria-hidden="true">
   @for (p of petals; track $index) {
@@ -26,64 +144,113 @@
         </div>
         <div class="env-front"></div>
         <div class="env-flap"></div>
-        <button class="seal" type="button" aria-label="افتح الدعوة">
-          <span>{{ w.groom.en[0] }}<small>&amp;</small>{{ w.bride.en[0] }}</span>
+        <svg class="env-spray l"><use href="#spray"/></svg>
+        <svg class="env-spray r"><use href="#spray"/></svg>
+        <button class="seal" type="button" aria-label="Open invitation">
+          <svg viewBox="0 0 32 29"><path d="M23.6 0c-3.4 0-6.3 2.7-7.6 5.6C14.7 2.7 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4c0 9.4 9.5 11.9 16 21.2 6.1-9.3 16-12.1 16-21.2C32 3.8 28.2 0 23.6 0z"/></svg>
         </button>
       </div>
 
-      <h1 class="cover-names">{{ w.groom.ar }} <span>&</span> {{ w.bride.ar }}</h1>
-      <p class="tap">اضغط لفتح الدعوة <span class="tap-hand">👆</span></p>
+      <h1 class="cover-names">{{ w.groom.en }} <span>&amp;</span> {{ w.bride.en }}</h1>
+      <p class="tap">Tap to open <span class="tap-hand">👆</span></p>
     </div>
   </section>
 }
 
 <!-- ================= زرار المزيكا ================= -->
 @if (opened()) {
-  <button class="music-btn" [class.spin]="playing()" (click)="toggleMusic()"
-    [attr.aria-label]="playing() ? 'إيقاف المزيكا' : 'تشغيل المزيكا'">
-    @if (playing()) {
-      <svg viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
-    } @else {
-      <svg viewBox="0 0 24 24"><path d="M4.27 3 3 4.27l9 9v.28A4 4 0 1 0 14 17v-1.73L19.73 21 21 19.73 4.27 3zM14 7h4V3h-6v5.18l2 2z"/></svg>
-    }
+  <button class="music-btn" [class.on]="playing()" (click)="toggleMusic()"
+    [attr.aria-label]="playing() ? 'Pause music' : 'Play music'">
+    <span class="bars"><i></i><i></i><i></i><i></i></span>
   </button>
 }
 
 <!-- ================= الدعوة ================= -->
 @if (opened()) {
+  <!-- ورد باهت في الخلفية -->
+  <div class="bg-flowers" aria-hidden="true">
+    <svg class="bgf a"><use href="#spray"/></svg>
+    <svg class="bgf b"><use href="#spray"/></svg>
+    <svg class="bgf c"><use href="#fl-light"/></svg>
+  </div>
+
   <main class="page">
+
+    <!-- الصورة في البرواز -->
+    <section class="photo-section">
+      <p class="ayah-top reveal" dir="rtl" lang="ar">﴿ وَخَلَقْنَاكُمْ أَزْوَاجًا ﴾</p>
+
+      <div class="photo-frame reveal">
+        <img [src]="w.photo" alt="{{ w.groom.en }} & {{ w.bride.en }}">
+        <svg class="frame-svg" viewBox="0 0 300 380" aria-hidden="true">
+          <ellipse cx="150" cy="190" rx="111" ry="146" fill="none" stroke="url(#g-gold)" stroke-width="3"/>
+          <ellipse cx="150" cy="190" rx="121" ry="156" fill="none" stroke="#1d3a78" stroke-width="15"/>
+          <ellipse cx="150" cy="190" rx="121" ry="156" fill="none" stroke="#dbe6f7" stroke-width="3.2"
+            stroke-dasharray="0.1 9" stroke-linecap="round"/>
+          <ellipse cx="150" cy="190" rx="130" ry="165" fill="none" stroke="url(#g-gold)" stroke-width="2.5"/>
+          <ellipse cx="150" cy="190" rx="135" ry="170" fill="none" stroke="url(#g-gold)" stroke-width=".8" opacity=".7"/>
+
+          <!-- فوق -->
+          <use href="#leaf" x="108" y="2" width="20" height="36" transform="rotate(-60 118 22)"/>
+          <use href="#leaf" x="172" y="2" width="20" height="36" transform="rotate(60 182 22)"/>
+          <use href="#fl-light" x="100" y="4" width="38" height="38"/>
+          <use href="#fl-light" x="162" y="4" width="38" height="38"/>
+          <use href="#fl-navy" x="122" y="-6" width="56" height="56"/>
+          <!-- تحت -->
+          <use href="#leaf" x="100" y="342" width="22" height="38" transform="rotate(-110 111 361)"/>
+          <use href="#leaf" x="178" y="342" width="22" height="38" transform="rotate(110 189 361)"/>
+          <use href="#fl-navy" x="104" y="338" width="38" height="38"/>
+          <use href="#fl-light" x="158" y="338" width="38" height="38"/>
+          <use href="#fl-white" x="122" y="328" width="56" height="56"/>
+          <!-- الجناب -->
+          <use href="#bud" x="2" y="140" width="22" height="30" transform="rotate(-20 13 155)"/>
+          <use href="#fl-white" x="0" y="168" width="40" height="40"/>
+          <use href="#fl-light" x="8" y="198" width="30" height="30"/>
+          <use href="#bud" x="276" y="140" width="22" height="30" transform="rotate(20 287 155)"/>
+          <use href="#fl-white" x="260" y="168" width="40" height="40"/>
+          <use href="#fl-navy" x="262" y="198" width="30" height="30"/>
+        </svg>
+      </div>
+
+      <p class="photo-names reveal">
+        <span>{{ w.groom.en }}</span><i>&amp;</i><span>{{ w.bride.en }}</span>
+      </p>
+      <p class="photo-date reveal">{{ dateEn }}</p>
+    </section>
 
     <!-- Hero -->
     <section class="hero">
       <div class="frame">
-        <p class="bismillah reveal">بسم الله الرحمن الرحيم</p>
-        <p class="ayah reveal">
+        <svg class="corner tl"><use href="#spray"/></svg>
+        <svg class="corner tr"><use href="#spray"/></svg>
+
+        <p class="bismillah reveal" dir="rtl" lang="ar">بسم الله الرحمن الرحيم</p>
+        <p class="ayah reveal" dir="rtl" lang="ar">
           ﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا
           وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾
         </p>
 
-        <div class="ornament reveal">❦</div>
+        <svg class="divider reveal"><use href="#divider"/></svg>
 
-        <p class="pre reveal">بكل الحب والفرح ندعوكم لمشاركتنا فرحتنا</p>
+        <p class="pre reveal">Together with their families<br>joyfully invite you to celebrate their wedding</p>
 
         <div class="names reveal">
-          <h2 class="name">{{ w.groom.ar }}</h2>
+          <h2 class="name">{{ w.groom.en }}</h2>
           <div class="amp">
             <span class="line"></span>
             <svg viewBox="0 0 32 29" class="mini-heart"><path d="M23.6 0c-3.4 0-6.3 2.7-7.6 5.6C14.7 2.7 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4c0 9.4 9.5 11.9 16 21.2 6.1-9.3 16-12.1 16-21.2C32 3.8 28.2 0 23.6 0z"/></svg>
             <span class="line"></span>
           </div>
-          <h2 class="name">{{ w.bride.ar }}</h2>
+          <h2 class="name">{{ w.bride.en }}</h2>
         </div>
 
-        <p class="names-en reveal">{{ w.groom.en }} &amp; {{ w.bride.en }}</p>
         <p class="save reveal">Save the Date</p>
       </div>
     </section>
 
     <!-- التاريخ -->
     <section class="card reveal">
-      <h3 class="section-title">موعد الفرح</h3>
+      <h3 class="section-title">The Wedding Day</h3>
 
       <div class="date-row">
         <div class="date-side">{{ dayName }}</div>
@@ -92,7 +259,7 @@
           <span class="m">{{ monthName }}</span>
           <span class="y">{{ year }}</span>
         </div>
-        <div class="date-side">الساعة {{ time }}</div>
+        <div class="date-side">At {{ time }}</div>
       </div>
 
       <div class="calendar">
@@ -111,54 +278,59 @@
       </div>
     </section>
 
+    <svg class="divider solo reveal"><use href="#divider"/></svg>
+
     <!-- العد التنازلي -->
     <section class="card reveal">
-      <h3 class="section-title">باقي على الفرح</h3>
+      <h3 class="section-title">Counting Down</h3>
       @if (!countdown().done) {
         <div class="countdown">
-          <div class="cbox"><span>{{ pad(countdown().days) }}</span><small>يوم</small></div>
-          <div class="cbox"><span>{{ pad(countdown().hours) }}</span><small>ساعة</small></div>
-          <div class="cbox"><span>{{ pad(countdown().minutes) }}</span><small>دقيقة</small></div>
-          <div class="cbox"><span>{{ pad(countdown().seconds) }}</span><small>ثانية</small></div>
+          <div class="cbox"><span>{{ pad(countdown().days) }}</span><small>Days</small></div>
+          <div class="cbox"><span>{{ pad(countdown().hours) }}</span><small>Hours</small></div>
+          <div class="cbox"><span>{{ pad(countdown().minutes) }}</span><small>Minutes</small></div>
+          <div class="cbox"><span>{{ pad(countdown().seconds) }}</span><small>Seconds</small></div>
         </div>
       } @else {
-        <p class="done-msg">النهارده الفرح 🎉 مستنيينكم!</p>
+        <p class="done-msg">Today is the day 🎉 See you there!</p>
       }
       <a class="btn ghost" [href]="calendarLink" target="_blank" rel="noopener">
-        📅 ضيف الميعاد لتقويمك
+        📅 Add to Calendar
       </a>
     </section>
 
+    <svg class="divider solo reveal"><use href="#divider"/></svg>
+
     <!-- المكان -->
     <section class="card reveal">
-      <h3 class="section-title">مكان الفرح</h3>
+      <h3 class="section-title">The Venue</h3>
       <div class="venue-icon">
         <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
       </div>
       <p class="venue-name">{{ w.venue.name }}</p>
-      <p class="venue-en">{{ w.venue.nameEn }}</p>
       <p class="venue-addr">{{ w.venue.address }}</p>
 
       <div class="map">
         <iframe [src]="mapUrl" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-          title="خريطة القاعة" allowfullscreen></iframe>
+          title="Venue map" allowfullscreen></iframe>
       </div>
 
       <a class="btn" [href]="w.venue.mapsLink" target="_blank" rel="noopener">
-        🧭 افتح اللوكيشن على الخريطة
+        🧭 Get Directions
       </a>
     </section>
 
     <!-- الختام -->
     <section class="closing reveal">
-      <div class="ornament">❦</div>
-      <p class="closing-text">بحضوركم تكتمل فرحتنا</p>
-      <p class="closing-sub">ويسعدنا تشريفكم ومشاركتكم أجمل أيام عمرنا</p>
-      <p class="sign">{{ w.groom.ar }} &amp; {{ w.bride.ar }}</p>
+      <svg class="corner tl"><use href="#spray"/></svg>
+      <svg class="corner tr"><use href="#spray"/></svg>
+      <svg class="divider"><use href="#divider"/></svg>
+      <p class="closing-text">Your presence will complete our joy</p>
+      <p class="closing-sub">We can't wait to celebrate the most beautiful day of our lives with you</p>
+      <p class="sign">{{ w.groom.en }} <i>&amp;</i> {{ w.bride.en }}</p>
       <p class="hashtag">{{ w.hashtag }}</p>
 
       <button class="btn ghost" type="button" (click)="share()">
-        {{ copied() ? '✔ اتنسخ اللينك' : '🔗 شارك الدعوة' }}
+        {{ copied() ? '✔ Link copied' : '🔗 Share Invitation' }}
       </button>
     </section>
 

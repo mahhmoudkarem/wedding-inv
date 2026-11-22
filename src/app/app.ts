@@ -18,6 +18,7 @@ export class App implements AfterViewInit, OnDestroy {
   @ViewChild('audio') audioRef!: ElementRef<HTMLAudioElement>;
 
   readonly w = WEDDING;
+  readonly rot6 = [0, 60, 120, 180, 240, 300];
   private readonly sanitizer = inject(DomSanitizer);
   private readonly weddingDate = new Date(WEDDING.date);
   private timer?: ReturnType<typeof setInterval>;
@@ -35,7 +36,7 @@ export class App implements AfterViewInit, OnDestroy {
   );
 
   // ---------- Date helpers ----------
-  private readonly fmt = (opts: Intl.DateTimeFormatOptions, locale = 'ar-EG') =>
+  private readonly fmt = (opts: Intl.DateTimeFormatOptions, locale = 'en-US') =>
     new Intl.DateTimeFormat(locale, { timeZone: 'Africa/Cairo', ...opts }).format(this.weddingDate);
 
   readonly dayName = this.fmt({ weekday: 'long' });
@@ -46,7 +47,7 @@ export class App implements AfterViewInit, OnDestroy {
   readonly dateEn = this.fmt({ day: '2-digit', month: '2-digit', year: 'numeric' }, 'en-GB').replace(/\//g, ' . ');
 
   readonly calendar: CalDay[] = this.buildCalendar();
-  readonly weekDays = ['سبت', 'أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة'];
+  readonly weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   readonly countdown = computed(() => {
     const diff = Math.max(0, this.weddingDate.getTime() - this.now());
@@ -74,16 +75,16 @@ export class App implements AfterViewInit, OnDestroy {
     const f = (d: Date) => d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
     const p = new URLSearchParams({
       action: 'TEMPLATE',
-      text: `فرح ${WEDDING.groom.ar} و ${WEDDING.bride.ar}`,
+      text: `${WEDDING.groom.en} & ${WEDDING.bride.en} Wedding`,
       dates: `${f(start)}/${f(end)}`,
-      location: `${WEDDING.venue.name} - ${WEDDING.venue.address}`,
-      details: 'بحضوركم تكتمل فرحتنا 🤍',
+      location: `${WEDDING.venue.name}, ${WEDDING.venue.address}`,
+      details: 'Your presence will complete our joy 🤍',
     });
     return `https://calendar.google.com/calendar/render?${p.toString()}`;
   })();
 
   pad(n: number): string {
-    return n.toLocaleString('ar-EG', { minimumIntegerDigits: 2 });
+    return String(n).padStart(2, '0');
   }
 
   // ---------- Lifecycle ----------
@@ -125,8 +126,8 @@ export class App implements AfterViewInit, OnDestroy {
 
   async share(): Promise<void> {
     const data = {
-      title: `فرح ${this.w.groom.ar} و ${this.w.bride.ar}`,
-      text: `يسعدنا دعوتكم لحضور فرح ${this.w.groom.ar} و ${this.w.bride.ar} 🤍`,
+      title: `${this.w.groom.en} & ${this.w.bride.en} Wedding`,
+      text: `You're invited to the wedding of ${this.w.groom.en} & ${this.w.bride.en} 🤍`,
       url: location.href,
     };
     try {
@@ -163,7 +164,7 @@ export class App implements AfterViewInit, OnDestroy {
     const y = get('year'), m = get('month') - 1, d = get('day');
 
     const firstDow = new Date(y, m, 1).getDay();       // 0 = Sunday
-    const offset = (firstDow + 1) % 7;                  // الأسبوع يبدأ السبت
+    const offset = firstDow;                            // week starts Sunday
     const daysInMonth = new Date(y, m + 1, 0).getDate();
 
     const cells: CalDay[] = [];
@@ -173,6 +174,6 @@ export class App implements AfterViewInit, OnDestroy {
   }
 
   toAr(n: number | null): string {
-    return n === null ? '' : n.toLocaleString('ar-EG');
+    return n === null ? '' : String(n);
   }
 }
